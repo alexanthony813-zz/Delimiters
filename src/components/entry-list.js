@@ -16,7 +16,7 @@ export default class EntryList extends React.Component {
         return _.map(this.props.entries, function(entry, index){
             entry.values = [];
             for(var prop in entry){
-                if(this.props.properties.indexOf(prop) !== -1){
+                if(this.props.properties.indexOf(prop.toLowerCase()) !== -1){
                     entry.values.push(entry[prop])
                 }
             }
@@ -29,7 +29,7 @@ export default class EntryList extends React.Component {
 
     render() {
         return (
-            <table className="table table-bordered">
+            <table className="table table-striped table-bordered table-hover">
                 <EntryListHeader properties = {this.props.properties} deleteHandler = {this.props.deleteHandler.bind(this)} toggleUniqueValues = {this.props.toggleUniqueValues.bind(this)}/>
                 <tbody>
                     {this.renderItems()}

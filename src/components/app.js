@@ -25,7 +25,8 @@ export default class App extends React.Component {
  
 
         var result = (data) => {
-            if(data.length > 0){
+            propName = propName.toLowerCase();
+            if(data.length > 0 && this.state.properties.indexOf(propName) === -1){
                 var newProperties = this.state.properties.slice();
                 newProperties.push(propName);
                 this.setState({
@@ -103,7 +104,6 @@ function toggleUniques(deduping){
             $(this).show();
         })
         $('.dedupe').each(function(){
-            console.log('this', $(this))
             $(this).removeClass('glyphicon-step-backward btn-success').addClass('glyphicon-duplicate btn-primary');
         })
     }

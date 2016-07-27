@@ -9,9 +9,9 @@ fs.readdir(main, function(err, files){
   files.forEach(function(file){
     if(fs.existsSync(main+file+'/'+'delimiters.json')){
       fs.readFile(main+file+'/'+'delimiters.json', 'utf8', function(err, data){
-          delimiter.addDelimiter(JSON.parse(data)['main'])
+          delimiter.addDelimiter(JSON.parse(data)['main']);
       })
-      fs.readFile(main+file+'/'+'delimiters.json')
+      fs.readFile(main+file+'/'+'delimiters.json');
     }
   })
 })

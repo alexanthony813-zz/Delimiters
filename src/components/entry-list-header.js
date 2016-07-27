@@ -3,7 +3,7 @@ import React from 'react';
 export default class EntryListHeader extends React.Component {
     render() {
         return (
-            <thead>
+            <thead className="thead-inverse">
                 <tr>
                     {this.props.properties.map(function(val, i){
                         return (
