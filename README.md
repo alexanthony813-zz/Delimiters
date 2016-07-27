@@ -25,6 +25,6 @@ Delimiter documents are **flattened** before being saved in DB, so search by **_
   }
 ```
 
-To Add Column : Simply Search Property
-To Find Duplicate Info : Press the "Duplicate" Button in the corresponding column
+To Add Column : Simply Search Property <br />
+To Find Duplicate Info : Press the "Duplicate" Button in the corresponding column <br />
 To Delete/Hide Column : Press the "Delete" Button in the corresponding column
