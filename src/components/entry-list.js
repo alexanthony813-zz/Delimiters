@@ -7,22 +7,20 @@ export default class EntryList extends React.Component {
     renderItems() {
         const props = _.omit(this.props, 'entries');
 
-        if(!this.props.entries || this.props.entries.length === 0){
+        if(!this.props.entries || (this.props.entries.length === 0 && this.props.properties.length === 1)){
             return (
-                <tr><td>Invalid property</td></tr>
+                <tr><td>Please search via property name above</td></tr>
                 );
         }
 
         return _.map(this.props.entries, function(entry, index){
             entry.values = [];
             for(var prop in entry){
-                console.log('this is the important shit, ', this.props.properties, prop)
                 if(this.props.properties.indexOf(prop) !== -1){
-                    entry.values.push(prop)
+                    entry.values.push(entry[prop])
                 }
             }
 
-            entry.values = _.map(entry, function(value, index) {return value});
             return (
                 <EntryListItem key={index} {...entry} {...props} />
                 )
@@ -32,7 +30,7 @@ export default class EntryList extends React.Component {
     render() {
         return (
             <table>
-                <EntryListHeader properties = {this.props.properties}/>
+                <EntryListHeader properties = {this.props.properties} deleteHandler = {this.props.deleteHandler.bind(this)}/>
                 <tbody>
                     {this.renderItems()}
                 </tbody>

@@ -11,7 +11,7 @@ export default class App extends React.Component {
         if(entries){
             properties = Object.keys(entries[0]);
         } else {
-            properties = ["_id"]
+            properties = ["_id"];
         }
 
         this.state = {
@@ -24,15 +24,28 @@ export default class App extends React.Component {
  
 
         var result = (data) => {
-            var newProperties = this.state.properties.slice();
-            newProperties.push(propName);
-            this.setState({
-              entries : data,
-              properties : newProperties
-            })
+            if(data.length > 0){            
+                var newProperties = this.state.properties.slice();
+                newProperties.push(propName);
+                this.setState({
+                    entries : data,
+                    properties : newProperties
+                })
+            } 
         }
         
         getDelimiters(propName,result);
+    }
+
+    handleDelete(propName){
+
+        for(var i = 0; i < this.state.properties.length; i++){
+            if(this.state.properties[i] === propName){
+                this.state.properties.splice(i, 1);
+                this.setState()
+                return;
+            }
+        }
     }
 
     render() {
@@ -41,7 +54,7 @@ export default class App extends React.Component {
                 <h1>Delimiters API</h1>
                 <Search entries={this.state.entries} searchHandler={this.handleSearch.bind(this)} />
                 <EntryList
-                    entries={this.state.entries} properties = {this.state.properties}
+                    entries={this.state.entries} properties = {this.state.properties} deleteHandler = {this.handleDelete.bind(this)}
                 />
             </div>
         );

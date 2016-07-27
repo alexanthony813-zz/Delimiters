@@ -4,12 +4,12 @@ export default class EntryListHeader extends React.Component {
     render() {
         return (
             <thead>
-                <tr>
+                <tr >
                     {this.props.properties.map(function(val, i){
                         return (
-                            <th key = {i}>{val}</th>
+                            <th key = {i} onClick={function() {this.props.deleteHandler(val)}.bind(this)}>{val}</th>
                             )
-                    })}
+                    }.bind(this))}
                 </tr>
             </thead>
         );

@@ -11,11 +11,9 @@ export default class EntryListItem extends React.Component {
 
         return (
             <tr>
-                <td>{this.props._id}</td>
                 {this.props.values.map(function(val, i){
                     return (<td key = {i}>{val}</td>)
                 })}
-                <td><button></button></td>
             </tr>
         );
     }

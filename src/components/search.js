@@ -9,10 +9,9 @@ export default class Search extends React.Component {
     render() {
         return (
           <div className="search-bar form-inline">
-            Search by propery name
+            Please search valid property to add to table
             <input className="form-control" type="text" id="form-control" onChange={
               _.debounce(function(){this.props.searchHandler(document.getElementById("form-control").value)},400).bind(this)}/>
-            <button id="add-property" onclick={function(){this.props.updateProperties(document.getElementById("form-control").value).bind(this)}}>Add property</button>
           </div> 
         );
     }
