@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './search';
 import EntryList from './entry-list';
-
+import $ from 'jquery'; 
 
 export default class App extends React.Component {
     constructor(props) {
@@ -16,7 +16,8 @@ export default class App extends React.Component {
 
         this.state = {
             entries : entries,
-            properties : properties
+            properties : properties,
+            deduping : false
         };
     }
 
@@ -42,10 +43,15 @@ export default class App extends React.Component {
         for(var i = 0; i < this.state.properties.length; i++){
             if(this.state.properties[i] === propName){
                 this.state.properties.splice(i, 1);
-                this.setState()
+                this.setState();
                 return;
             }
         }
+    }
+
+    toggleUniqueValues(){
+        this.state.deduping = !this.state.deduping
+        toggleUniques(this.state.deduping)
     }
 
     render() {
@@ -54,7 +60,7 @@ export default class App extends React.Component {
                 <h1>Delimiters API</h1>
                 <Search entries={this.state.entries} searchHandler={this.handleSearch.bind(this)} />
                 <EntryList
-                    entries={this.state.entries} properties = {this.state.properties} deleteHandler = {this.handleDelete.bind(this)}
+                    entries={this.state.entries} properties = {this.state.properties} deleteHandler = {this.handleDelete.bind(this)} toggleUniqueValues = {this.toggleUniqueValues.bind(this)}
                 />
             </div>
         );
@@ -74,4 +80,31 @@ function getDelimiters(propName, callback){
           console.log("ERROR, ajaxfail", err)
         }
     });
+}
+
+function toggleUniques(deduping){
+    if(deduping){
+        $('.dedupe').each(function(){
+            $(this).removeClass('glyphicon-duplicate btn-primary').addClass('glyphicon-step-backward btn-success');
+        })
+        var seen = {};
+        $('td').each(function() {
+            // Encode column and content information.
+            var key =  $(this).index() +  $(this).text();
+            if (seen[key]){
+                $(this).parent().show();
+            } else {
+                seen[key] = $(this).text();
+                $(this).parent().hide();
+            }
+        })
+    } else {
+        $('tr').each(function(){
+            $(this).show();
+        })
+        $('.dedupe').each(function(){
+            console.log('this', $(this))
+            $(this).removeClass('glyphicon-step-backward btn-success').addClass('glyphicon-duplicate btn-primary');
+        })
+    }
 }

@@ -29,8 +29,8 @@ export default class EntryList extends React.Component {
 
     render() {
         return (
-            <table>
-                <EntryListHeader properties = {this.props.properties} deleteHandler = {this.props.deleteHandler.bind(this)}/>
+            <table className="table table-bordered">
+                <EntryListHeader properties = {this.props.properties} deleteHandler = {this.props.deleteHandler.bind(this)} toggleUniqueValues = {this.props.toggleUniqueValues.bind(this)}/>
                 <tbody>
                     {this.renderItems()}
                 </tbody>
