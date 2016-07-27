@@ -24,7 +24,7 @@ export default class App extends React.Component {
  
 
         var result = (data) => {
-            if(data.length > 0){            
+            if(data.length > 0){
                 var newProperties = this.state.properties.slice();
                 newProperties.push(propName);
                 this.setState({
