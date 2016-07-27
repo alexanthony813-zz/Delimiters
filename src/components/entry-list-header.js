@@ -5,8 +5,11 @@ export default class EntryListHeader extends React.Component {
         return (
             <thead>
                 <tr>
-                    <th>Entry ID/Country</th>
-                    <th>Value</th>
+                    {this.props.properties.map(function(val, i){
+                        return (
+                            <th key = {i}>{val}</th>
+                            )
+                    })}
                 </tr>
             </thead>
         );

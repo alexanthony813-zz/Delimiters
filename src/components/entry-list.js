@@ -7,13 +7,25 @@ export default class EntryList extends React.Component {
     renderItems() {
         const props = _.omit(this.props, 'entries');
 
-        return _.map(this.props.entries, (entry, index) => <EntryListItem key={index} {...entry} {...props} />);
+        if(!this.props.entries || this.props.entries.length === 0){
+            return (
+                <tr><td>Invalid property</td></tr>
+                );
+        }
+
+        return _.map(this.props.entries, function(entry, index){
+            entry.values = _.map(entry, function(value, index) {return value});
+            return (
+                <EntryListItem key={index} {...entry} {...props} />
+                )
+            })
     }
 
     render() {
+        console.log('in "ENTRY LIST: props, state', this.props, this.state)
         return (
             <table>
-                <EntryListHeader />
+                <EntryListHeader properties = {this.props.properties}/>
                 <tbody>
                     {this.renderItems()}
                 </tbody>

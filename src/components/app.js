@@ -6,9 +6,17 @@ import EntryList from './entry-list';
 export default class App extends React.Component {
     constructor(props) {
         super(props);
+        var entries = getDelimiters('_id');
+        var headers;
+        if(entries){
+            headers = Object.keys(entries[0]);
+        } else {
+            headers = ["INVALID INPUT"]
+        }
 
         this.state = {
-            entries : getDelimiters('_id')
+            entries : entries,
+            properties : headers
         };
     }
 
@@ -16,7 +24,8 @@ export default class App extends React.Component {
  
         var result = (data) => {
           this.setState({
-            entries : data
+            entries : data,
+            properties : Object.keys(data[0])
           })
         }
         
@@ -29,7 +38,7 @@ export default class App extends React.Component {
                 <h1>Delimiters API</h1>
                 <Search entries={this.state.entries} searchHandler={this.handleSearch.bind(this)} />
                 <EntryList
-                    entries={this.state.entries}
+                    entries={this.state.entries} properties = {this.state.properties}
                 />
             </div>
         );
