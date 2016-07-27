@@ -14,15 +14,22 @@ export default class EntryList extends React.Component {
         }
 
         return _.map(this.props.entries, function(entry, index){
+            entry.values = [];
+            for(var prop in entry){
+                console.log('this is the important shit, ', this.props.properties, prop)
+                if(this.props.properties.indexOf(prop) !== -1){
+                    entry.values.push(prop)
+                }
+            }
+
             entry.values = _.map(entry, function(value, index) {return value});
             return (
                 <EntryListItem key={index} {...entry} {...props} />
                 )
-            })
+            }.bind(this))
     }
 
     render() {
-        console.log('in "ENTRY LIST: props, state', this.props, this.state)
         return (
             <table>
                 <EntryListHeader properties = {this.props.properties}/>

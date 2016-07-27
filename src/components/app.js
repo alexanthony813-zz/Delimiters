@@ -7,26 +7,29 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         var entries = getDelimiters('_id');
-        var headers;
+        var properties;
         if(entries){
-            headers = Object.keys(entries[0]);
+            properties = Object.keys(entries[0]);
         } else {
-            headers = ["INVALID INPUT"]
+            properties = ["_id"]
         }
 
         this.state = {
             entries : entries,
-            properties : headers
+            properties : properties
         };
     }
 
     handleSearch(propName){
  
+
         var result = (data) => {
-          this.setState({
-            entries : data,
-            properties : Object.keys(data[0])
-          })
+            var newProperties = this.state.properties.slice();
+            newProperties.push(propName);
+            this.setState({
+              entries : data,
+              properties : newProperties
+            })
         }
         
         getDelimiters(propName,result);
